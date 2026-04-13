@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief vidéo – Solaris / CR Aquitaine</title>
+<style>
+  :root {
+    --dark: #0f3a3a;
+    --teal: #16a39a;
+    --accent: #e63946;
+    --bg: #f7f9f9;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5a6b6b;
+    --border: #e1e7e7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .logos { display: flex; gap: 32px; align-items: center; }
+  .logos img { height: 56px; width: auto; }
+  .header-meta { text-align: right; font-size: 13px; color: var(--muted); }
+  .header-meta strong { color: var(--dark); display: block; font-size: 15px; }
+
+  main { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  h1 {
+    font-size: 32px;
+    color: var(--dark);
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+  .subtitle {
+    color: var(--teal);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  section h2 {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  section h3 {
+    font-size: 22px;
+    color: var(--dark);
+    margin: 0 0 18px;
+  }
+
+  .scene-visual {
+    background: #f0f4f4;
+    border-left: 4px solid var(--teal);
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .scene-visual strong { color: var(--dark); }
+
+  .script {
+    font-size: 17px;
+    color: var(--text);
+    background: #fbfdfd;
+    border: 1px dashed var(--border);
+    padding: 20px 24px;
+    border-radius: 8px;
+  }
+  .script p { margin: 0 0 14px; }
+  .script p:last-child { margin-bottom: 0; }
+  .script .de { font-style: italic; color: var(--teal); font-weight: 600; }
+
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .spec { background: #f0f4f4; padding: 14px 16px; border-radius: 8px; }
+  .spec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+  .spec-value { font-size: 15px; color: var(--dark); font-weight: 600; }
+
+  .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+  .asset {
+    background: #f0f4f4;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .asset img { max-width: 100%; max-height: 70%; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+  .asset-label { font-weight: 600; color: var(--dark); }
+
+  .hero-img {
+    margin: 0 0 20px;
+  }
+  .hero-img img {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  .hero-img.missing img { display: none; }
+  .hero-img.missing::before {
+    content: "📷 images/ca-aquitaine.jpg — à déposer dans le repo";
+    display: block;
+    background: #f0f4f4;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .hero-img figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .berlin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .berlin-grid figure { margin: 0; }
+  .berlin-grid img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+  .berlin-grid figure.missing img { display: none; }
+  .berlin-grid figure.missing::before {
+    content: "📷 " attr(data-fallback);
+    display: block;
+    background: #f0f4f4;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 100px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    height: 260px;
+  }
+  .berlin-grid figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; align-items: center; }
+  @media (max-width: 640px) { .berlin-grid { grid-template-columns: 1fr; } }
+
+  .pending {
+    background: #fff4e6;
+    color: #b45309;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .callout {
+    background: #fff4e6;
+    border-left: 4px solid #f59e0b;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+    .header-meta { text-align: left; }
+    h1 { font-size: 26px; }
+    section { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logos">
+    <img src="images/logo-niuviu.png" alt="NiuViu">
+    <img src="images/logo-ca-pcd.png" alt="Crédit Agricole – Pôle Client et Développement">
+  </div>
+  <div class="header-meta">
+    <strong>Caisse Régionale d'Aquitaine</strong>
+    Brief vidéo hebdo · Semaine du 13/04/2026
+  </div>
+</header>
+
+<main>
+
+  <div class="subtitle">Épisode · Allemagne</div>
+  <h1>Solaris — la banque européenne nativement construite sur l'IA</h1>
+
+  <!-- SPECS -->
+  <section>
+    <h2>Fiche technique</h2>
+    <div class="specs">
+      <div class="spec">
+        <div class="spec-label">Format</div>
+        <div class="spec-value">Vidéo avatars · 2 voix</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Structure</div>
+        <div class="spec-value">2 avatars intro + outro / 1 voix au centre</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Destination</div>
+        <div class="spec-value">CR Aquitaine — Pôle Client et Développement</div>
+      </div>
+      <div class="spec">
+        <div class="spec-label">Sujet</div>
+        <div class="spec-value">Fintech allemande Solaris</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section>
+    <h2>Scène 1 · Intro</h2>
+    <h3>Plan d'ouverture avec les 2 avatars</h3>
+    <div class="scene-visual">
+      <strong>Visuel :</strong> les 2 avatars, en arrière-plan une photo du Crédit Agricole — Caisse Régionale d'Aquitaine.
+    </div>
+    <figure class="hero-img">
+      <img src="images/ca-aquitaine.jpg" alt="Crédit Agricole Aquitaine" onerror="this.parentElement.classList.add('missing')">
+      <figcaption>Crédit Agricole — Caisse Régionale d'Aquitaine <span class="pending">📍 localisation à valider</span></figcaption>
+    </figure>
+    <div class="script">
+      <p><span class="de">Guten Tag</span>, aujourd'hui direction l'Allemagne à la rencontre de <strong>Solaris</strong> qui annonce vouloir devenir la 1ère banque européenne nativement construite sur l'intelligence artificielle. Rien que cela !</p>
+    </div>
+  </section>
+
+  <!-- CENTRAL -->
+  <section>
+    <h2>Scène 2 · Corps</h2>
+    <h3>Femme seule à l'écran · Berlin</h3>
+    <div class="scene-visual">
+      <strong>Visuel :</strong> plans de Berlin — <strong>Fernsehturm</strong> (plan favori), Porte de Brandebourg, Reichstag, ambiance street. Sélection à valider.
+    </div>
+    <div class="berlin-grid">
+      <figure>
+        <img src="images/berlin-fernsehturm.jpg" alt="Fernsehturm">
+        <figcaption>Fernsehturm <span class="pending">⭐ favori</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/berlin-brandebourg.jpg" alt="Porte de Brandebourg">
+        <figcaption>Porte de Brandebourg</figcaption>
+      </figure>
+      <figure>
+        <img src="images/berlin-reichstag.jpg" alt="Reichstag">
+        <figcaption>Reichstag</figcaption>
+      </figure>
+      <figure>
+        <img src="images/berlin-street.jpg" alt="Street art Berlin">
+        <figcaption>Ambiance street Berlin</figcaption>
+      </figure>
+    </div>
+    <div class="script">
+      <p>Solaris est une société technologique disposant d'une licence bancaire allemande, spécialisée dans le <em>Banking-as-a-Service</em>. La fintech ambitionne de transformer son infrastructure de finance intégrée en une plateforme bancaire paneuropéenne automatisée à large échelle.</p>
+      <p>Concrètement, Solaris délègue la gestion des opérations à des agents IA. Seuls le contrôle, la conformité et la gouvernance restent sous supervision humaine.</p>
+      <p>L'objectif : faire tourner une banque en continu, avec moins de frictions et une capacité d'exécution démultipliée. À la clé, un développement produit plus rapide, une scalabilité accrue et des intégrations simplifiées.</p>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <section>
+    <h2>Scène 3 · Outro</h2>
+    <h3>Retour sur le plan d'ouverture avec les 2 avatars</h3>
+    <div class="scene-visual">
+      <strong>Visuel :</strong> retour sur le plan d'intro (2 avatars + photo CR Aquitaine).
+    </div>
+    <div class="script">
+      <p>Tu vois, Solaris souhaite ainsi offrir aux entreprises non financières une banque modulable, rapide à déployer, et des parcours enrichis où des agents IA pilotent les opérations critiques : onboarding, scoring, monitoring, gestion opérationnelle.</p>
+      <p>Un petit bretzel pour digérer ? 🥨</p>
+    </div>
+  </section>
+
+  <!-- ASSETS -->
+  <section>
+    <h2>Assets visuels</h2>
+    <h3>Images à intégrer</h3>
+    <div class="assets-grid">
+      <div class="asset">
+        <img src="images/ca-aquitaine.jpg" alt="CR Aquitaine" onerror="this.style.display='none'">
+        <div class="asset-label">CR Aquitaine</div>
+        <div>Plan intro / outro</div>
+      </div>
+      <div class="asset">
+        <img src="images/berlin-fernsehturm.jpg" alt="Fernsehturm" onerror="this.style.display='none'">
+        <div class="asset-label">Fernsehturm</div>
+        <div>Plan central (favori)</div>
+      </div>
+      <div class="asset">
+        <img src="images/berlin-brandebourg.jpg" alt="Porte de Brandebourg" onerror="this.style.display='none'">
+        <div class="asset-label">Porte de Brandebourg</div>
+        <div>Plan central</div>
+      </div>
+      <div class="asset">
+        <img src="images/berlin-reichstag.jpg" alt="Reichstag" onerror="this.style.display='none'">
+        <div class="asset-label">Reichstag</div>
+        <div>Plan central</div>
+      </div>
+      <div class="asset">
+        <img src="images/berlin-street.jpg" alt="Street art Berlin" onerror="this.style.display='none'">
+        <div class="asset-label">Ambiance street</div>
+        <div>Plan central</div>
+      </div>
+      <div class="asset">
+        <img src="images/logo-niuviu.png" alt="Logo NiuViu" onerror="this.style.display='none'">
+        <div class="asset-label">Logo NiuViu</div>
+        <div>Permanent à l'écran</div>
+      </div>
+      <div class="asset">
+        <img src="images/logo-ca-pcd.png" alt="Logo CA PCD" onerror="this.style.display='none'">
+        <div class="asset-label">Logo CA — Pôle Client</div>
+        <div>Permanent à l'écran</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Note branding :</strong> les deux logos (NiuViu + CA Pôle Client et Développement) restent affichés pendant toute la durée de la vidéo.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Brief vidéo · NiuViu × Crédit Agricole Aquitaine · 2026
+</footer>
+
+</body>
+</html>
